@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-windows-sapien:
-    runs-on: windows-2022
+    runs-on: windows-2019
     permissions:
       contents: write
     steps:
@@ -42,7 +42,7 @@ jobs:
             sapien_build/_sapien_install
 
   build-windows-pybind:
-    runs-on: windows-2022
+    runs-on: windows-2019
     needs: build-windows-sapien
     strategy:
       matrix:
