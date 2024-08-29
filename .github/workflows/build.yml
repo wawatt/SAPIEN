@@ -2,37 +2,8 @@ name: Build
 
 on:
   push:
-    branches: [main, dev]
-
+    branches: [dev]
 jobs:
-  build-linux-all:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    container:
-      image: fxiangucsd/sapien-build-env:3.3
-      env:
-        CMAKE_BUILD_PARALLEL_LEVEL: 2
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          submodules: "true"
-          fetch-depth: 0
-          fetch-tags: true
-      - name: Set up cmake cache
-        uses: actions/cache@v3
-        with:
-          path: docker_sapien_build/_sapien_deps
-          key: ${{ runner.os }}.${{ hashFiles('**/*.cmake', '**/CMakeLists.txt') }}
-      - name: Build wheels
-        run: "git config --global --add safe.directory '*' && ./build.sh"
-      - name: Upload wheels
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux-wheels-all
-          path: ./wheelhouse/*.whl
-
   build-windows-sapien:
     runs-on: windows-2022
     permissions:
@@ -104,7 +75,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [build-linux-all, build-windows-pybind]
+    needs: [build-windows-pybind]
     permissions:
       contents: write
     steps:
