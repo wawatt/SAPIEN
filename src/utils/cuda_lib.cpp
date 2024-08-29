@@ -1,6 +1,6 @@
 #include "./cuda_lib.h"
 #include <stdexcept>
-
+#include <iostream>
 #if _WIN64
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
