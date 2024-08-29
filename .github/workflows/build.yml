@@ -41,7 +41,7 @@ jobs:
             sapien_build/_sapien_install
 
   build-windows-pybind:
-    runs-on: windows-2019
+    runs-on: windows-2022
     needs: build-windows-sapien
     strategy:
       matrix:
