@@ -104,11 +104,6 @@ jobs:
         with:
           name: windows-wheel-3.12
           path: wheelhouse
-      - name: Download wheels
-        uses: actions/download-artifact@v3
-        with:
-          name: linux-wheels-all
-          path: wheelhouse
       - name: ls
         run: ls wheelhouse
       - name: Update Nightly Release
