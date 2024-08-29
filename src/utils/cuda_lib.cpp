@@ -12,6 +12,7 @@ namespace sapien {
 
 CudaLib::CudaLib() {
 #if _WIN64
+  std::cout << "------------------------ this is win" << std::endl;
   HMODULE handle = LoadLibrary("nvcuda.dll");
   libcuda = (void *)handle;
   cudaFree(0); // establish cuda context with runtime API
@@ -25,6 +26,7 @@ CudaLib::CudaLib() {
   this->cuEventSynchronize =
       (decltype(::cuEventSynchronize) *)GetProcAddress(handle, "cuEventSynchronize");
 #else
+  std::cout << "------------------------ this is lnx" << std::endl;
   libcuda = dlopen("libcuda.so", RTLD_LAZY);
 
   cudaFree(0); // establish cuda context with runtime API
@@ -42,6 +44,7 @@ CudaLib::CudaLib() {
 CudaLib &CudaLib::Get() {
   static CudaLib lib;
   if (!lib.libcuda) {
+    std::cout << "------------------------ !lib.libcuda" << std::endl;
     throw std::runtime_error("failed to load libcuda");
   }
   return lib;
